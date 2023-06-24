@@ -96,19 +96,25 @@ class UserController extends Controller
         }
     }
 
+    public function reloadCaptcha(){
+        return response()->json(['captcha' => captcha_img('math')]);
+    }
+
     // Sistem Login (Login)
     function check(Request $request)
     {
         // Validasi Input
         $request->validate([
             'email'=>'required|email|exists:users,email',
-            'password'=>'required|min:5|max:30'
+            'password'=>'required|min:5|max:30',
+            'captcha'=>'required|captcha'
         ],[
             'email.exists'=>'Email ini belum tersedia di tabel user',
             'email.required'=>'Email wajib di isi',
             'password.required'=>'Password wajib di isi',
             'password.min'=>'Isi password minimal 5 kata',
             'password.max'=>'Isi password maksimal 30 kata',
+            'captcha.required'=>'Captcha wajib di isi',
         ]);
 
         $account = $request->only('email','password');
