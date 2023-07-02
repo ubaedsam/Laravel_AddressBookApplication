@@ -17,8 +17,11 @@ class GroupApiController extends Controller
     public function index()
     {
         $groups = Groups::where('user_id', auth()->user()->id)->paginate(100);
-
-        return GroupResource::collection($groups);
+        // return GroupResource::collection($groups);
+        return response()->json([
+            'Pesan' => 'Semua data group berhasil ditampilkan',
+            'Data Group' => $groups
+        ], 200);
     }
 
     /**
@@ -45,7 +48,11 @@ class GroupApiController extends Controller
         $group->group = $request->group;
         if($group->save())
         {
-            return new GroupResource($group);
+            // return new GroupResource($group);
+            return response()->json([
+                'Pesan' => 'Data group berhasil ditambahkan',
+                'Data Group' => $group
+            ], 200);
         }
     }
 
@@ -57,8 +64,12 @@ class GroupApiController extends Controller
      */
     public function show($id)
     {
-        $group = Groups::findOrFail($id);
-        return new GroupResource($group);
+        $group = Groups::where('user_id', auth()->user()->id)->find($id);
+        // return new GroupResource($group);
+        return response()->json([
+            'Pesan' => 'Satu data group berhasil ditampilkan',
+            'Data Group' => $group
+        ], 200);
     }
 
     /**
@@ -82,12 +93,16 @@ class GroupApiController extends Controller
     public function update(Request $request, $id)
     {
         $user_id = Auth::user()->id;
-        $group = Groups::findOrFail($id);
+        $group = Groups::where('user_id', auth()->user()->id)->find($id);
         $group->user_id = $user_id;
         $group->group = $request->group;
         if($group->save())
         {
-            return new GroupResource($group);
+            // return new GroupResource($group);
+            return response()->json([
+                'Pesan' => 'Data group berhasil diubah',
+                'Data Group' => $group
+            ], 200);
         }
     }
 
@@ -99,19 +114,28 @@ class GroupApiController extends Controller
      */
     public function destroy($id)
     {
-        $group = Groups::findOrFail($id);
+        $group = Groups::where('user_id', auth()->user()->id)->find($id);
         if($group->delete())
         {
-            return new GroupResource($group);
+            // return new GroupResource($group);
+            return response()->json([
+                'Pesan' => 'Data group berhasil dihapus',
+                'Data Group' => $group
+            ], 200);
         }
     }
 
     public function search($group)
     {
-        return Groups::where([
+        $groups = Groups::where([
             ["group","like","%".$group."%"],
             ['user_id', auth()->user()->id]
             ])
             ->get();
+
+        return response()->json([
+            'Pesan' => 'Data group yang anda cari berhasil ditampilkan',
+            'Data Group' => $groups
+        ], 200);
     }
 }

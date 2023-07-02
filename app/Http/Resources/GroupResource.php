@@ -25,7 +25,7 @@ class GroupResource extends JsonResource
     {
         return [
             'version' => '1.0.0',
-            'author_url' => url('https://testapiurl.com')
+            'author_url' => url('https://AddressBookApplication.com')
         ];
     }
 }

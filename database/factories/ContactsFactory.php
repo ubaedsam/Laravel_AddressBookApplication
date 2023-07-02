@@ -16,7 +16,8 @@ class ContactsFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            // 'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => 8,
             'group_id' => Groups::inRandomOrder()->first()->id,
             'name' => $this->faker->name(50),
             'address' => $this->faker->address(),

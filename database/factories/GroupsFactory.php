@@ -15,7 +15,8 @@ class GroupsFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            // 'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => 8,
             'group' => $this->faker->text(15),
         ];
     }

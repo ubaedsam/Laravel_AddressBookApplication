@@ -17,8 +17,11 @@ class ContactApiController extends Controller
     public function index()
     {
         $contacts = Contacts::where('user_id', auth()->user()->id)->paginate(100);
-
-        return ContactResource::collection($contacts);
+        // return ContactResource::collection($contacts);
+        return response()->json([
+            'Pesan' => 'Semua data contact berhasil ditampilkan',
+            'Data Contact' => $contacts
+        ], 200);
     }
 
     /**
@@ -48,7 +51,11 @@ class ContactApiController extends Controller
         $contact->phone = $request->phone;
         if($contact->save())
         {
-            return new ContactResource($contact);
+            // return new ContactResource($contact);
+            return response()->json([
+                'Pesan' => 'Data contact berhasil ditambahkan',
+                'Data Contact' => $contact
+            ], 200);
         }
     }
 
@@ -60,8 +67,12 @@ class ContactApiController extends Controller
      */
     public function show($id)
     {
-        $contact = Contacts::findOrFail($id);
-        return new ContactResource($contact);
+        $contact = Contacts::where('user_id', auth()->user()->id)->find($id);
+        // return new ContactResource($contact);
+        return response()->json([
+            'Pesan' => 'Satu data contact berhasil ditampilkan',
+            'Data Contact' => $contact
+        ], 200);
     }
 
     /**
@@ -85,7 +96,7 @@ class ContactApiController extends Controller
     public function update(Request $request, $id)
     {
         $user_id = Auth::user()->id;
-        $contact = Contacts::findOrFail($id);
+        $contact = Contacts::where('user_id', auth()->user()->id)->find($id);
         $contact->user_id = $user_id;
         $contact->group_id = $request->group_id;
         $contact->name = $request->name;
@@ -93,7 +104,11 @@ class ContactApiController extends Controller
         $contact->phone = $request->phone;
         if($contact->save())
         {
-            return new ContactResource($contact);
+            // return new ContactResource($contact);
+            return response()->json([
+                'Pesan' => 'Data contact berhasil diubah',
+                'Data Contact' => $contact
+            ], 200);
         }
     }
 
@@ -105,27 +120,39 @@ class ContactApiController extends Controller
      */
     public function destroy($id)
     {
-        $contact = Contacts::findOrFail($id);
+        $contact = Contacts::where('user_id', auth()->user()->id)->find($id);
         if($contact->delete())
         {
-            return new ContactResource($contact);
+            // return new ContactResource($contact);
+            return response()->json([
+                'Pesan' => 'Data contact berhasil dihapus',
+                'Data Contact' => $contact
+            ], 200);
         }
     }
 
     public function filter($data)
     {
-        return Contacts::where([["name","like","%".$data."%"],['user_id', auth()->user()->id]])
+        $data = Contacts::where([["name","like","%".$data."%"],['user_id', auth()->user()->id]])
         ->orWhere([["address","like","%".$data."%"],['user_id', auth()->user()->id]])
         ->orWhere([["phone","like","%".$data."%"],['user_id', auth()->user()->id]])
         ->orWhere([["group_id","like","%".$data."%"],['user_id', auth()->user()->id]])
         ->get();
+
+        return response()->json([
+            'Pesan' => 'Data contact yang anda cari berhasil ditampilkan',
+            'Data Contact' => $data
+        ], 200);
     }
 
     public function list(Request $request)
     {
         $blog_query = Contacts::with('group');
         if($request->keyword){
-            $blog_query->where([['name','LIKE','%'.$request->keyword.'%'],['user_id', auth()->user()->id]]);
+            // $blog_query->where([['name','LIKE','%'.$request->keyword.'%'],['user_id', auth()->user()->id]]);
+            $blog_query->whereHas('group',function($query) use($request){
+                $query->where([['name','LIKE','%'.$request->keyword.'%'],['user_id', auth()->user()->id]]);
+            });
         }
 
         if($request->group){
@@ -137,8 +164,8 @@ class ContactApiController extends Controller
         $blogs = $blog_query->get();
 
         return response()->json([
-            'message' => 'contact berhasil ditampilkan',
-            'data' => $blogs
+            'Pesan' => 'Data contact yang anda cari/filter berhasil ditampilkan',
+            'Data Contact' => $blogs
         ], 200);
     }
 }

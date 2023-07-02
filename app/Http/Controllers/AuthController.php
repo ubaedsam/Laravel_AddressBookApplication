@@ -92,7 +92,8 @@ class AuthController extends Controller
 
         return response()->json([
             'status_code' => 200,
-            'token' => $tokenResult
+            'token' => $tokenResult,
+            'Pesan' => 'Anda berhasil login'
         ]);
     }
 
@@ -101,7 +102,8 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
         return response()->json([
             'status_code' => 200,
-            'message' => 'Token berhasil dihapus'
+            'token' => 'Token berhasil dihapus',
+            'Pesan' => 'Anda berhasil logout'
         ]);
     }
 }

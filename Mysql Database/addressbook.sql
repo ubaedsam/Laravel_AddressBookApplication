@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jun 2023 pada 22.59
+-- Waktu pembuatan: 02 Jul 2023 pada 08.13
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.2
 
@@ -51,7 +51,11 @@ INSERT INTO `contact` (`id`, `user_id`, `group_id`, `name`, `address`, `phone`, 
 (8, 2, 7, 'Uknown', 'aadad', '021887222946', '2023-06-21 01:49:01', '2023-06-21 01:49:01'),
 (10, 2, 11, 'Bule ABCD', 'loroemm jnajdajda', '021887222946', '2023-06-21 02:21:16', '2023-06-21 02:27:05'),
 (11, 2, 1, 'Bismo', 'lorem jadjadjbadba', '02189377822', '2023-06-21 13:43:25', '2023-06-21 13:43:25'),
-(12, 8, 14, 'Ubaed S.A.M', 'ubaejsdbjbjbwjdbwjd', '0813663728221', '2023-06-22 13:09:30', '2023-06-22 13:12:10');
+(15, 2, 13, 'Mr. Jules Flatley', '246 Schumm Way\nBoyerville, VA 10815-0765', '+1-360-994-4084', '2023-06-24 02:11:06', '2023-06-24 02:11:06'),
+(18, 2, 17, 'Etha Mayert', '856 Hahn Meadows\nMargueritestad, DC 41324', '678.744.3893', '2023-06-24 02:11:07', '2023-06-24 02:11:07'),
+(31, 2, 8, 'Kendrick Cole', '765 Myra Land\nRauchester, VA 03099-3461', '531.323.4316', '2023-06-24 02:11:09', '2023-06-24 02:11:09'),
+(36, 2, 1, 'Landen Murazik', '192 Edwina Land\nNorth Breanaborough, CA 69307', '+13206498519', '2023-06-24 02:11:10', '2023-06-24 02:11:10'),
+(42, 2, 19, 'Dedrick Halvorson', '64541 Hoeger Fall\nEast Lorena, NC 97265-3496', '231-367-3500', '2023-06-24 02:11:11', '2023-06-24 02:11:11');
 
 -- --------------------------------------------------------
 
@@ -96,7 +100,9 @@ INSERT INTO `group` (`id`, `user_id`, `group`, `created_at`, `updated_at`) VALUE
 (11, 2, 'Group 5', '2023-06-21 00:43:52', '2023-06-21 00:43:52'),
 (12, 2, 'Group Baru Diubah', '2023-06-21 11:59:11', '2023-06-21 13:23:53'),
 (13, 2, 'Grup Futsal', '2023-06-21 22:52:48', '2023-06-21 22:52:48'),
-(14, 8, 'Group Baru Diubah', '2023-06-22 13:02:34', '2023-06-22 13:31:52');
+(17, 2, 'Ratione.', '2023-06-24 02:10:41', '2023-06-24 02:10:41'),
+(19, 2, 'Incidunt quia.', '2023-06-24 02:10:42', '2023-06-24 02:10:42'),
+(21, 2, 'Ut voluptate.', '2023-06-24 02:10:43', '2023-06-24 02:10:43');
 
 -- --------------------------------------------------------
 
@@ -183,8 +189,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `email_verified`, `created_at`, `updated_at`) VALUES
-(2, 'User 1', 'ubaedasam@gmail.com', NULL, '$2y$10$dSb6Umux.q4lF0wj28DnOOnytXDzLqPDqm0DPCbmRTJgAHjveKpV.', NULL, 1, '2023-06-19 20:04:02', '2023-06-19 20:16:56'),
-(8, 'Setia Hardja', 'setiahardja01@gmail.com', NULL, '$2y$10$0bgI1bLWbwhSsy0vN.oIVOKHeASMba/jP8b/j4/DPO2aYu37Lyz/u', NULL, 1, '2023-06-22 12:56:44', '2023-06-22 12:58:09');
+(2, 'User 1', 'ubaedasam@gmail.com', NULL, '$2y$10$dSb6Umux.q4lF0wj28DnOOnytXDzLqPDqm0DPCbmRTJgAHjveKpV.', NULL, 1, '2023-06-19 20:04:02', '2023-06-19 20:16:56');
 
 -- --------------------------------------------------------
 
@@ -277,7 +282,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -289,7 +294,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
